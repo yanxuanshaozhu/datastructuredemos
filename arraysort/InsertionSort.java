@@ -14,7 +14,11 @@ public class InsertionSort {
 			System.out.print(n + " ");
 		}
 		System.out.println();
-
+		
+		/*
+		 * The part array[0],array[1],...,array[i-1] has already been sorted.
+		 */
+		
 		for (int i = 1; i < array.length; i++) {
 			int temp = array[i];
 			int j = i;
