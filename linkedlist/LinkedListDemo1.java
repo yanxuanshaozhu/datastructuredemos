@@ -50,27 +50,27 @@ class Node1 {
 }
 
 class LinkedList1 {
-	private Node1 firsrtNode;
+	private Node1 firstNode;
 
 	public boolean isEmpty() {
-		return firsrtNode == null;
+		return firstNode == null;
 	}
 
 	public void InsertFirst(int iData, double dData) {
 		Node1 newNode = new Node1(iData, dData);
-		newNode.setNextNode(firsrtNode);
-		firsrtNode = newNode;
+		newNode.setNextNode(firstNode);
+		firstNode = newNode;
 	}
 
 	public Node1 deleteFirst() {
-		Node1 tempNode = firsrtNode;
-		firsrtNode = firsrtNode.getNextNode();
+		Node1 tempNode = firstNode;
+		firstNode = firstNode.getNextNode();
 		return tempNode;
 	}
 
 	public void displayLinkedList() {
 		System.out.print("List(first->last): ");
-		Node1 currentNode = firsrtNode;
+		Node1 currentNode = firstNode;
 		while (currentNode != null) {
 			currentNode.displayNode();
 			currentNode = currentNode.getNextNode();

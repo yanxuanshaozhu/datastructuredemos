@@ -51,26 +51,26 @@ class Node2 {
 }
 
 class LinkedList2 {
-	private Node2 firsrtNode;
+	private Node2 firstNode;
 
 	public boolean isEmpty() {
-		return firsrtNode == null;
+		return firstNode == null;
 	}
 
 	public void InsertFirst(int iData, double dData) {
 		Node2 newNode = new Node2(iData, dData);
-		newNode.setNextNode(firsrtNode);
-		firsrtNode = newNode;
+		newNode.setNextNode(firstNode);
+		firstNode = newNode;
 	}
 
 	public Node2 deleteFirst() {
-		Node2 tempNode = firsrtNode;
-		firsrtNode = firsrtNode.getNextNode();
+		Node2 tempNode = firstNode;
+		firstNode = firstNode.getNextNode();
 		return tempNode;
 	}
 
 	public Node2 find(int key) {
-		Node2 currentNode = firsrtNode;
+		Node2 currentNode = firstNode;
 		while (currentNode.getiData() != key) {
 			if (currentNode.getNextNode() == null) {
 				return null;
@@ -82,8 +82,8 @@ class LinkedList2 {
 	}
 
 	public Node2 delete(int key) {
-		Node2 currentNode = firsrtNode;
-		Node2 previousNode = firsrtNode;
+		Node2 currentNode = firstNode;
+		Node2 previousNode = firstNode;
 		while (currentNode.getiData() != key) {
 			if (currentNode.getNextNode() == null) {
 				return null;
@@ -92,8 +92,8 @@ class LinkedList2 {
 				currentNode = currentNode.getNextNode();
 			}
 		}
-		if (currentNode == firsrtNode) {
-			firsrtNode = firsrtNode.getNextNode();
+		if (currentNode == firstNode) {
+			firstNode = firstNode.getNextNode();
 		} else {
 			previousNode.setNextNode(currentNode.getNextNode());
 		}
@@ -102,7 +102,7 @@ class LinkedList2 {
 
 	public void displayLinkedList() {
 		System.out.print("List(first->last): ");
-		Node2 currentNode = firsrtNode;
+		Node2 currentNode = firstNode;
 		while (currentNode != null) {
 			currentNode.displayNode();
 			currentNode = currentNode.getNextNode();
