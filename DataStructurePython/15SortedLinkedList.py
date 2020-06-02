@@ -1,28 +1,23 @@
-class UnsortedLinkedList:
+class SortedLinkedList:
     class Node:
         def __init__(self, item):
             self.value = item
-            self.nextNode = None
+            self.nextNoede = None
 
         def getValue(self):
             return self.value
 
+        def getNextNode(self):
+            return self.nextNoede
+
         def setValue(self, item):
             self.value = item
 
-        def getNext(self):
-            return self.nextNode
-
-        def setNext(self, node):
-            self.nextNode = node
+        def setNextNode(self, node):
+            self.nextNoede = node
 
     def __init__(self):
         self.head = None
-
-    def add(self, item):
-        temp = UnsortedLinkedList.Node(item)
-        temp.setNext(self.head)
-        self.head = temp
 
     def isEmpty(self):
         return self.head is None
@@ -32,54 +27,55 @@ class UnsortedLinkedList:
         current = self.head
         while current is not None:
             count = count + 1
-            current = current.getNext()
+            current = current.getNextNode()
         return count
 
     def contains(self, item):
-        current = self.head
         flag = False
-        while current is not None and not flag:
-            if current.getValue == item:
-                flag = True
-            else:
-                current = current.getNext()
-        return flag
-
-    def remove(self, item):
+        stop = False
         current = self.head
-        previous = None
-        flag = False
-        while not flag:
+        while current is not None and not flag and not stop:
             if current.getValue() == item:
                 flag = True
             else:
-                previous = current
-                current = current.getNext()
-        if previous is None:
-            self.head = current.getNext()
-        else:
-            previous.setNext(current.getNext())
+                if current.getValue() > item:
+                    stop = True
+                else:
+                    current = current.getNextNode()
+        return flag
 
-    def append(self, item):
-        current = self.head
-        while current is not None:
-            current = current.getNext()
-        current.setValue(item)
-        current.setNext(None)
-
-    def insert(self, index, item):
-        temp = UnsortedLinkedList.Node(item)
+    def add(self, item):
+        node = SortedLinkedList.Node(item)
         previous = None
         current = self.head
-        if index == 0:
-            temp.setNext(self.head)
-            self.head = temp
-        else:
-            for i in range(index):
+        stop = False
+        while current is not None and not stop:
+            if current.getValue() > item:
+                stop = True
+            else:
                 previous = current
-                current = current.getNext()
-            previous.setNext(temp)
-            temp.setNext(current)
+                current = current.getNextNode()
+        if previous is None:
+            node.setNextNode(self.head)
+            self.head = node
+        else:
+            node.setNextNode(current)
+            previous.setNextNode(node)
+
+    def remove(self, item):
+        previous = None
+        current = self.head
+        flag = False
+        while current is not None and not flag:
+            if current.getValue() >= item:
+                flag = True
+            else:
+                previous = current
+                current = current.getNextNode()
+        if previous is None:
+            self.head = current.getNextNode()
+        else:
+            previous.setNext(current.getNext())
 
     def index(self, item):
         count = -1
@@ -110,7 +106,7 @@ class UnsortedLinkedList:
 
 
 if __name__ == "__main__":
-    list1 = UnsortedLinkedList()
+    list1 = SortedLinkedList()
     list1.add(1)
     list1.add(2)
     list1.add(3)
@@ -120,9 +116,6 @@ if __name__ == "__main__":
     list1.travel()
     print("remove")
     list1.remove(3)
-    list1.travel()
-    print("insert")
-    list1.insert(1, 4)
     list1.travel()
     print("contains")
     print(list1.contains(5))
