@@ -1,20 +1,18 @@
 # The pirates want to load a number of fortunes with various weight onto their ship,and the maximum
 # volume the ship can afford is c,find the maximum number of fortunes can be loaded onto the ship
 
-import random
-
 
 def load(fortunes: list, volume: int) -> tuple:
     ls = sorted(fortunes)
-    sum = 0
+    total = 0
     items = list()
-    while sum <= volume:
+    while total <= volume:
         item = ls.pop(0)
-        if sum + item > volume:
+        if total + item > volume:
             break
-        sum += item
+        total += item
         items.append(item)
-    return items, sum
+    return items, total
 
 
 if __name__ == "__main__":
